@@ -3,11 +3,13 @@ package com.toastack.solution.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.toastack.solution.security.Authority;
@@ -48,6 +50,7 @@ public class User {
   public void setPassword(String password) {
     this.password = password;
   }
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
   public Set<Authority> getAuthorities() {
 	return authorities;
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.toastack.solution.model.User;
 import com.toastack.solution.repositories.UserRepository;
+import com.toastack.solution.security.CustomSecurityUser;
 
 @Service
 public class userDetailsServiceImp implements UserDetailsService {
@@ -23,7 +24,7 @@ public class userDetailsServiceImp implements UserDetailsService {
 			throw new UsernameNotFoundException("Invalid Username and Password");
 		}
 		
-		return null;
+		return new CustomSecurityUser(user);
 	}
 	
 }

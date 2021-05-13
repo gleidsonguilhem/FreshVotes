@@ -10,9 +10,19 @@ public class CustomSecurityUser extends User implements UserDetails {
 	
 	private static final long serialVersionUID = 8363299479210102849L;
 
+	public CustomSecurityUser() { }
+	
+	public CustomSecurityUser(User user) {
+		this.setId(user.getId());
+		this.setName(user.getName());
+		this.setPassword(user.getPassword());
+		this.setUsername(user.getUsername());
+		this.setAuthorities(user.getAuthorities());
+	}
+	
 	@Override
 	public Set<Authority> getAuthorities() {
-		return this.getAuthorities();
+		return super.getAuthorities();
 	}
 
 	@Override
