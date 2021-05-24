@@ -3,6 +3,7 @@
 <head>
 	<title>Fresh Votes 1.0 - Login</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<link th:href="@{/css/main.css}" rel="stylesheet" />
 	<script 
 		src="https://code.jquery.com/jquery-3.6.0.slim.js" 
 		integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous">
@@ -15,44 +16,47 @@
 		});
 	</script>
 </head>
+<body>
 	<div class="container">
-		<div class="row">
-			<div class="cols-2">
+		<div class="card">
+			<div class="card-header"><h2>Please Login</h2></div>
+			<div class="card-body">
 				 <form action="" method="post">
 				 	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-				    <fieldset>
-				        <legend>Please Login</legend>
 				        <!-- use param.error assuming FormLoginConfigurer#failureUrl contains the query parameter error -->
-				        <div th:if="${param.error != null}">
+				        <div th:if="${param.error != null}" class="alert alert-danger">
 				                Failed to login.
-				                <div th:if="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+				                <div th:if="${SPRING_SECURITY_LAST_EXCEPTION != null}" class="alert alert-warn">
 				                  Reason: <span th:text="${SPRING_SECURITY_LAST_EXCEPTION.message}"> </span>
 				                </div>
 				        </div>
 				        <!-- the configured LogoutConfigurer#logoutSuccessUrl is /login?logout and contains the query param logout -->
-				        <div th:if="${param.logout != null}">
+				        <div th:if="${param.logout != null}" class="alert alert-info">
 				                You have been logged out.
 				        </div>
-				        <p>
-				        <label for="username">Username</label>
-				        <input type="text" id="username" name="username"/>
-				        </p>
-				        <p>
-				        <label for="password">Password</label>
-				        <input type="password" id="password" name="password"/>
-				        </p>
-				        <!-- if using RememberMeConfigurer make sure remember-me matches RememberMeConfigurer#rememberMeParameter -->
-				        <p>
-				        <label for="remember-me">Remember Me?</label>
-				        <input type="checkbox" id="remember-me" name="remember-me"/>
-				        </p>
-				        <div>
-				            <button type="submit" class="btn btn-primary">Log in</button>
-				            <button type="button" id="createAccount" class="btn btn-dark">Create Account</button>
+				        <div class="mb-3 row">
+				        	<label for="username" class="col-12 col-sm-3 col-md-2 col-form-label">Username</label>
+				        	<div class="col-12 col-sm-9 col-md-10">
+				        		<input type="text" class="form-control" id="username" name="username"/>
+				        	</div>
 				        </div>
-				    </fieldset>
+				        <div class="mb-3 row">
+					        <label for="password" class="col-12 col-sm-3 col-md-2 col-form-label">Password</label>
+					        <div class="col-12 col-sm-9 col-md-10">
+					        	<input type="password" class="form-control" id="password" name="password"/>
+							</div>
+						</div>
+				        <div class="row">
+				        	<div class="col-6">
+				            	<button type="submit" class="btn btn-primary">Log in</button>
+				            </div>
+				        	<div class="col-6">
+				            	<button type="button" id="createAccount" class="btn btn-dark float-end">Create Account</button>
+				        	</div>
+				        </div>
 				</form>
 			</div>
 		</div>
 	</div>
+</body>
 </html>
