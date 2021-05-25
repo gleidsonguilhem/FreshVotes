@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Fresh Votes - Products</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<link th:href="@{/css/main.css}" rel="stylesheet" />
+	<script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+</head>
+<body> 
+	<div class="container" th:if="${product != null}">
+		<h1> Products Page</h1>
+		<div th:text="|Is product published: ${product.published}|">
+			Content of the div text
+		</div>
+	</div>
+</body>
+</html>

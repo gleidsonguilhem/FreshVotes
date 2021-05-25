@@ -19,6 +19,7 @@ public class Product {
 	private Long id;
 	private String name;
 	private User user;
+	private Boolean published;
 	private Set<Feature> features = new HashSet<>();
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,6 +42,13 @@ public class Product {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public Boolean getPublished() {
+		return published;
+	}
+	public void setPublished(Boolean published) {
+		this.published = published;
 	}
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
