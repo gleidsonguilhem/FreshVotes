@@ -26,11 +26,6 @@ public class ProductController {
 	@Autowired
 	private ProductRepository productRepo;
 	
-	@GetMapping("/products")
-	public String getProducts(ModelMap model) {
-		return "product";
-	}
-	
 	@GetMapping("/products/{productId}")
 	public String getProducts(@PathVariable Long productId, ModelMap model, HttpServletResponse response) throws NotFoundException, IOException {
 		Optional<Product> productOpt = productRepo.findById(productId);

@@ -19,6 +19,22 @@
 				</form>
 			</div>
 		</div>
+		<br><br>
+		
+		<div th:if="${products != null}">
+			<div class="row">
+				<div class="col">
+					<h1>Products</h1>
+				</div>
+			</div>
+			
+		<div class="row" th:each="product : ${products}">
+			<div class="col">
+				<a th:href="@{/products/{productId}(productId = ${product.id})}" th:text="${product.name}"></a>
+			</div>
+		</div>
+		
+		<br>
 		<div class="row">
 			<div class="col">
 				<form action="/products" method="post">

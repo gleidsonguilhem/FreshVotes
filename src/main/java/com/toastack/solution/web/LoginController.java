@@ -15,20 +15,11 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/")
-	public String rootView() {
-		return "index";
-	}
-	
 	@GetMapping("/login")
 	public String login() {
 		return "login";
 	}
 	
-	@GetMapping("/dashboard")
-	public String dashboard() {
-		return "dashboard";
-	}
 	
 	@GetMapping("/register")
 	public String register(ModelMap model) {

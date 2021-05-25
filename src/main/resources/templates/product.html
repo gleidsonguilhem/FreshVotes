@@ -18,11 +18,13 @@
 					<input type="text" class="form-control" th:field="${product.name}" />
 				</div>
 			</div>
-			
-			<div th:text="|Is product published: ${product.published}|">
-				Content of the div text
+			<br>
+			<div class="form-check form-switch">
+				<label class="form-check-label" for="flexSwitchCheckDefault">published </label>
+				<input type="checkbox" class="form-check-input" th:field="${product.published}">
 			</div>
-			<button class="btn btn-primary">Update Product</button>
+			<br>
+			<button class="btn btn-warning">Update Product</button>
 		</form>
 	</div>
 </body>
