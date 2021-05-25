@@ -59,5 +59,10 @@ public class Product {
 		this.features = features;
 	}
 	
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", user=" + user + ", published=" + published + ", features="
+				+ features + "]";
+	}
 	
 }

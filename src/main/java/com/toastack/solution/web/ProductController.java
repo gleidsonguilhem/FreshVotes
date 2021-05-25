@@ -45,6 +45,12 @@ public class ProductController {
 		return "product";
 	}
 	
+	@PostMapping("/products/{productId}")
+	public String saveProduct(@PathVariable Long productId, Product product) {
+		product = productRepo.save(product);
+		return "redirect:/products/"+product.getId();
+	}
+	
 	@PostMapping("/products")
 	public String creteProduct(@AuthenticationPrincipal User user) {
 		Product product = new Product();
