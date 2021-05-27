@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-/*TODO: Error seems to be in the Product class*/
-
 @Entity
 public class Product {
 	private Long id;
@@ -36,7 +34,7 @@ public class Product {
 		this.name = name;
 	}
 	
-	@ManyToOne
+	@ManyToOne 
 	public User getUser() {
 		return user;
 	}
