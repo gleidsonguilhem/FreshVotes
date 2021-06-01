@@ -1,10 +1,14 @@
 package com.toastack.solution.web;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,13 +26,14 @@ import javassist.NotFoundException;
 
 @Controller
 public class ProductController {
+	private Logger log = LoggerFactory.getLogger(ProductController.class);  
 	
 	@Autowired
 	private ProductRepository productRepo;
 	
 	@GetMapping("/products/{productId}")
 	public String getProducts(@PathVariable Long productId, ModelMap model, HttpServletResponse response) throws NotFoundException, IOException {
-		Optional<Product> productOpt = productRepo.findById(productId);
+		Optional<Product> productOpt = productRepo.findByIdWithUser(productId);
 		
 		if(productOpt.isPresent()) {
 			Product product = productOpt.get();
@@ -58,4 +63,20 @@ public class ProductController {
 		return "redirect:/products/"+product.getId();
 	}
 	
+	@GetMapping("/p/{productName}")
+	public String productUserView(@PathVariable String productName, ModelMap model) {
+		if(productName != null) {
+			try {				
+				String decodedProductName = URLDecoder.decode(productName, StandardCharsets.UTF_8.name());
+				Optional<Product> productOpt = productRepo.findByName(decodedProductName);
+				
+				if(productOpt.isPresent()) {
+					model.put("product", productOpt.get());
+				}
+			}catch(UnsupportedEncodingException e) {
+				log.error("There was an error decoding a product URL", e);
+			}
+		}
+		return "productUserView";
+	}
 }
