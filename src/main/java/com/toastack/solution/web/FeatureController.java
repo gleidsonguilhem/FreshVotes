@@ -19,7 +19,6 @@ import com.toastack.solution.model.Feature;
 import com.toastack.solution.model.User;
 import com.toastack.solution.service.FeatureService;
 
-
 @Controller
 @RequestMapping("/products/{productId}/features")
 public class FeatureController {
@@ -35,13 +34,14 @@ public class FeatureController {
 	}
 	
 	@GetMapping("{featureId}")
-	public String getFeature(@PathVariable Long productId, @PathVariable Long featureId, ModelMap model) {
+	public String getFeature(@AuthenticationPrincipal User user, @PathVariable Long productId, @PathVariable Long featureId, ModelMap model) {
 		Optional<Feature> featureOpt = featureService.findById(featureId);
 		
 		if(featureOpt.isPresent()) {
 			model.put("feature", featureOpt.get());
 		}
 		//TODO: handle situation where we can't find a feature by featureID
+		model.put("user", user);
 		return "feature";
 	}
 	
