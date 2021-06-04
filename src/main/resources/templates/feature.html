@@ -33,6 +33,15 @@
 			 					</div>
 							</div>
 						</form>
+						
+						<br>
+						<div>
+							<h2>Comments</h2>
+							<div th:each="comments : ${comments}">
+								<span th:text="${comments.text}"></span>
+							</div>
+						</div>
+					
 					</div>	
 				</div>
 			</div>
