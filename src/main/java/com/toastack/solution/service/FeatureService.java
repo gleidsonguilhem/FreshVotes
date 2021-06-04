@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.toastack.solution.model.Feature;
 import com.toastack.solution.model.Product;
+import com.toastack.solution.model.User;
 import com.toastack.solution.repositories.FeatureRepository;
 import com.toastack.solution.repositories.ProductRepository;
 
@@ -19,7 +20,7 @@ public class FeatureService {
 	@Autowired
 	private FeatureRepository featureRepository;
 	
-	public Feature createFeature(Long productId) {
+	public Feature createFeature(User user, Long productId) {
 		Feature feature = new Feature();
 		
 		Optional<Product> productOpt = productRepository.findById(productId);
@@ -30,14 +31,19 @@ public class FeatureService {
 			feature.setProduct(product);
 			product.getFeatures().add(feature);
 			
+			feature.setUser(user);
+			user.getFeatures().add(feature);
+			
 			feature.setStatus("Pending review");
+			
 			
 			return featureRepository.save(feature);
 		}
 		return feature;		
 	}
 	
-	public Feature save(Feature feature) {
+	public Feature save(User user, Feature feature) {
+		
 		return featureRepository.save(feature);
 	}
 

@@ -24,7 +24,7 @@ public class User {
   private String password;
   private Set<Authority> authorities = new HashSet<>();
   private Set<Product> products = new HashSet<>();
-  
+  private Set<Feature> features = new HashSet<>();
   
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   public Long getId() {
@@ -66,11 +66,18 @@ public class User {
 	this.products = products;
 }
   
-@Override
-public String toString() {
+ @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy = "user")
+ public Set<Feature> getFeatures() {
+	return features;
+ }
+ public void setFeatures(Set<Feature> features) {
+	this.features = features;
+ }
+ @Override
+ public String toString() {
 	return "User [id=" + id + ", username=" + username + ", name=" + name + ", password=" + password + ", authorities="
 			+ authorities + "]";
-}
+ }
   
   
   
